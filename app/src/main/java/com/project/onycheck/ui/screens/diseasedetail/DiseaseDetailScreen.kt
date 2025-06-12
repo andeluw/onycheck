@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.project.onycheck.data.DiseaseData
@@ -24,6 +25,8 @@ import com.project.onycheck.ui.components.AppScaffold
 import com.project.onycheck.ui.navigation.NavItem
 import com.project.onycheck.ui.theme.Blue700
 import com.project.onycheck.ui.theme.Blue800
+import com.project.onycheck.ui.theme.Gray500
+import com.project.onycheck.ui.theme.Gray700
 import com.project.onycheck.ui.theme.Gray900
 import com.project.onycheck.ui.theme.Red700
 
@@ -41,10 +44,12 @@ fun DiseaseDetailScreen(diseaseName: String, navController: NavController) {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = "Back",
+                            tint = Gray900
                         )
                     }
-                }
+                },
+                modifier = Modifier.background(Color.White)
             )
         }
     ) { innerPadding ->
@@ -72,7 +77,8 @@ fun DiseaseDetailScreen(diseaseName: String, navController: NavController) {
                     text = detail.userFriendlyName,
                     style = MaterialTheme.typography.headlineMedium,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(bottom = 16.dp)
+                    modifier = Modifier.padding(vertical = 16.dp),
+                    color = Gray900
                 )
             }
 
@@ -117,7 +123,7 @@ fun DiseaseDetailScreen(diseaseName: String, navController: NavController) {
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Button(
-                        onClick = { navController.navigate(NavItem.Doctors.route) },
+                        onClick = { NavItem.Doctors.navigate(navController) },
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(44.dp),
@@ -133,14 +139,13 @@ fun DiseaseDetailScreen(diseaseName: String, navController: NavController) {
                         )
                     }
                     TextButton(
-                        onClick = { navController.navigate(NavItem.Home.route) },
+                        onClick = { NavItem.Home.navigate(navController) },
                         colors = ButtonDefaults.textButtonColors(
                             contentColor = Blue800
                         )
                     ) {
                         Text(
                             "Back to Home",
-
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.SemiBold
                         )
@@ -153,15 +158,15 @@ fun DiseaseDetailScreen(diseaseName: String, navController: NavController) {
                 Text(
                     text = "This analysis is powered by AI and is not a substitute for professional medical advice. Always consult with a licensed healthcare provider.",
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.padding(vertical = 16.dp)
+                    color = Gray500,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(bottom = 24.dp, top = 12.dp)
                 )
             }
         }
     }
 }
 
-// The DetailSection helper composable remains unchanged
 @Composable
 private fun DetailSection(
     title: String,
@@ -181,8 +186,11 @@ private fun DetailSection(
             Text(text = it, style = MaterialTheme.typography.bodyLarge, color = Gray900)
         }
         items?.forEach { item ->
-            Row(modifier = Modifier.padding(start = 8.dp, top = 4.dp)) {
-                Text("•", modifier = Modifier.padding(end = 8.dp))
+            Row(
+                modifier = Modifier.padding(start = 8.dp, top = 4.dp),
+                verticalAlignment = Alignment.Top
+            ) {
+                Text("•", modifier = Modifier.padding(end = 8.dp), color = Gray700)
                 Text(text = item, style = MaterialTheme.typography.bodyLarge, color = Gray900)
             }
         }

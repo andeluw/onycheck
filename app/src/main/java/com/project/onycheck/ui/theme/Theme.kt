@@ -12,17 +12,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
-private val DarkColorScheme = darkColorScheme(
-    primary = Blue400,
-    onPrimary = Gray950,
-    secondary = Blue300,
-    background = Gray900,
-    surface = Gray800,
-    onBackground = Gray100,
-    onSurface = Gray200,
-    error = Red400,
-    onError = Gray950
-)
+//private val DarkColorScheme = darkColorScheme(
+//    primary = Blue400,
+//    onPrimary = Gray950,
+//    secondary = Blue300,
+//    background = Gray900,
+//    surface = Gray800,
+//    onBackground = Gray100,
+//    onSurface = Gray200,
+//    error = Red400,
+//    onError = Gray950
+//)
 
 private val LightColorScheme = lightColorScheme(
     primary = Blue600,
@@ -53,13 +53,13 @@ fun OnyCheckTheme(
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
+//        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+//            val context = LocalContext.current
+//            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+//        }
 
-        darkTheme -> DarkColorScheme
-        else -> DarkColorScheme
+        darkTheme -> LightColorScheme
+        else -> LightColorScheme
     }
 
     MaterialTheme(

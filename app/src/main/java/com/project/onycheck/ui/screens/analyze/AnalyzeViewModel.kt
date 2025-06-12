@@ -1,6 +1,7 @@
 package com.project.onycheck.ui.screens.analyze
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -8,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.project.onycheck.data.remote.dto.ApiError
 import com.project.onycheck.data.repository.NailRepository
+import com.project.onycheck.ui.screens.analyze.utils.convertBitmapToBase64
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -60,6 +62,36 @@ class AnalyzeViewModel @Inject constructor(
         }
     }
 
+    fun analyzeNailImageBase64(imageUri: Uri, bitmap: Bitmap) {
+        _uiState.update { it.copy(selectedImageUri = imageUri, isLoading = true, error = null) }
+
+        viewModelScope.launch {
+            try {
+                val base64Image = convertBitmapToBase64(bitmap)
+
+                val response = nailRepository.analyzeNailImageBase64(base64Image)
+
+                if (response.isSuccessful && response.body() != null) {
+                    Log.d("AnalyzeViewModel", "Base64 API Success: ${response.body()}")
+                    _uiState.update {
+                        it.copy(isLoading = false, predictionResult = response.body())
+                    }
+                } else {
+                    val errorMsg = parseError(response)
+                    Log.e("AnalyzeViewModel", "Base64 API Error: $errorMsg")
+                    _uiState.update {
+                        it.copy(isLoading = false, error = errorMsg)
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e("AnalyzeViewModel", "Base64 Network Exception: ${e.message}", e)
+                _uiState.update {
+                    it.copy(isLoading = false, error = "Network Error: ${e.message}")
+                }
+            }
+        }
+    }
+
     fun clearResult() {
         _uiState.update {
             it.copy(
@@ -81,7 +113,7 @@ class AnalyzeViewModel @Inject constructor(
 
     private fun createMultipartBody(context: Context, uri: Uri): MultipartBody.Part {
         val stream = context.contentResolver.openInputStream(uri)!!
-        val requestBody = stream.readBytes().toRequestBody("image/jpeg".toMediaTypeOrNull())
-        return MultipartBody.Part.createFormData("file", "nail_image.jpg", requestBody)
+        val requestBody = stream.readBytes().toRequestBody("image/png".toMediaTypeOrNull())
+        return MultipartBody.Part.createFormData("file", "nail_image.png", requestBody)
     }
 }

@@ -71,7 +71,6 @@ import com.composables.icons.lucide.Lucide
 import com.composables.icons.lucide.RefreshCw
 import com.composables.icons.lucide.X
 import com.project.onycheck.ui.screens.analyze.utils.getNewImageUri
-import com.project.onycheck.ui.screens.analyze.utils.saveBitmapToUri
 import com.project.onycheck.ui.screens.analyze.utils.takePhoto
 import com.smarttoolfactory.cropper.ImageCropper
 import com.smarttoolfactory.cropper.model.OutlineType
@@ -182,7 +181,9 @@ internal fun CameraView(
     var flashMode by remember { mutableIntStateOf(ImageCapture.FLASH_MODE_OFF) }
 
     val imageCapture = remember {
-        ImageCapture.Builder().build()
+        ImageCapture.Builder()
+            .setCaptureMode(ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY)
+            .build()
     }
 
     var cameraSelector by remember { mutableStateOf(CameraSelector.DEFAULT_BACK_CAMERA) }
@@ -328,27 +329,6 @@ internal fun CameraView(
                 onClick = {
                     takePhoto(context, imageCapture, onImageCaptured, onError)
                 }
-//                onClick = {
-//                    val uri = getNewImageUri(context)
-//                    val outputOptions = ImageCapture.OutputFileOptions.Builder(
-//                        context.contentResolver,
-//                        uri,
-//                        ContentValues()
-//                    ).build()
-//
-//                    imageCapture.takePicture(
-//                        outputOptions,
-//                        ContextCompat.getMainExecutor(context),
-//                        object : ImageCapture.OnImageSavedCallback {
-//                            override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-//                                onImageCaptured(uri)
-//                            }
-//                            override fun onError(exc: ImageCaptureException) {
-//                                onError(exc)
-//                            }
-//                        }
-//                    )
-//                }
             ) {
                 Box(
                     modifier = Modifier

@@ -6,6 +6,8 @@ import androidx.compose.material.icons.rounded.MedicalInformation
 import androidx.compose.material.icons.rounded.Newspaper
 import androidx.compose.material.icons.rounded.SavedSearch
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.navigation.NavController
+import androidx.navigation.NavGraph.Companion.findStartDestination
 
 sealed class NavItem(
     val route: String,
@@ -18,6 +20,16 @@ sealed class NavItem(
     object Doctors : NavItem("doctors", Icons.Rounded.MedicalInformation, "Doctors")
 
     object DiseaseDetail : NavItem("disease_detail")
+
+    fun navigate(navController: NavController) {
+        navController.navigate(route) {
+            popUpTo(navController.graph.findStartDestination().id) {
+                saveState = true
+            }
+            launchSingleTop = true
+            restoreState = true
+        }
+    }
 }
 
 fun createDiseaseDetailRoute(diseaseName: String): String {

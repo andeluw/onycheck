@@ -1,14 +1,26 @@
 package com.project.onycheck.ui.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.project.onycheck.ui.navigation.NavItem
+import com.project.onycheck.ui.theme.Blue100
+import com.project.onycheck.ui.theme.Blue200
+import com.project.onycheck.ui.theme.Blue300
+import com.project.onycheck.ui.theme.Blue500
+import com.project.onycheck.ui.theme.Blue600
+import com.project.onycheck.ui.theme.Blue700
+import com.project.onycheck.ui.theme.Blue800
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -32,21 +44,31 @@ fun AppScaffold(
         topBar = topBar,
         bottomBar = {
             if (showBottomBar) {
-                NavigationBar {
+                NavigationBar(
+                    containerColor = Blue800
+                ) {
                     items.forEach { screen ->
                         NavigationBarItem(
-                            icon = { Icon(screen.icon!!, contentDescription = screen.title) },
-                            label = { Text(screen.title!!) },
+                            icon = {
+                                Icon(
+                                    imageVector = screen.icon!!,
+                                    contentDescription = screen.title,
+                                    tint = if (currentDestination?.hierarchy?.any { it.route == screen.route } == true)
+                                        Blue100
+                                    else
+                                        Color.White,
+                                    modifier = Modifier.size(28.dp)
+                                )
+                            },
                             selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
                             onClick = {
-                                navController.navigate(screen.route) {
-                                    popUpTo(navController.graph.findStartDestination().id) {
-                                        saveState = true
-                                    }
-                                    launchSingleTop = true
-                                    restoreState = true
-                                }
-                            }
+                                screen.navigate(navController)
+                            },
+                            colors = NavigationBarItemDefaults.colors(
+                                selectedIconColor = Blue100,
+                                unselectedIconColor = Color.White,
+                                indicatorColor = Blue600
+                            )
                         )
                     }
                 }

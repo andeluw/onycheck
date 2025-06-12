@@ -145,7 +145,8 @@ internal fun LoadingView(uiState: AnalyzeUiState, innerPadding: PaddingValues) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(innerPadding),
+            .padding(innerPadding)
+            .background(Color.White),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -165,7 +166,8 @@ internal fun LoadingView(uiState: AnalyzeUiState, innerPadding: PaddingValues) {
         Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = "Analyzing your image...",
-            style = MaterialTheme.typography.titleMedium
+            style = MaterialTheme.typography.titleMedium,
+            color = Gray900
         )
     }
 }
@@ -185,7 +187,7 @@ internal fun ResultView(
             .fillMaxSize()
             .padding(innerPadding)
             .background(Color.White)
-            .padding(40.dp),
+            .padding(horizontal = 36.dp, vertical = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -202,7 +204,7 @@ internal fun ResultView(
                     .background(Gray300)
             )
         }
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
         val result = uiState.predictionResult
 
@@ -395,7 +397,7 @@ private fun DiseaseResultContent(
             color = Gray700
         )
 //        Spacer(modifier = Modifier.weight(1f))
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
         Button(
             onClick = { onLearnMore(result.predicted_class) },
@@ -443,7 +445,7 @@ private fun DiseaseResultContent(
                 fontWeight = FontWeight.SemiBold
             )
         }
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = "Disclaimer: This AI analysis is for informational purposes only and is not a substitute for a professional medical diagnosis.",
             style = MaterialTheme.typography.bodySmall,

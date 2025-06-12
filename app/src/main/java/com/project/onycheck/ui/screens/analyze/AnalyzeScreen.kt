@@ -26,6 +26,7 @@ import androidx.navigation.NavController
 import com.project.onycheck.R
 import com.project.onycheck.data.remote.dto.PredictionResponse
 import com.project.onycheck.ui.components.AppScaffold
+import com.project.onycheck.ui.navigation.NavItem
 import com.project.onycheck.ui.navigation.createDiseaseDetailRoute
 import com.project.onycheck.ui.screens.analyze.components.CameraView
 import com.project.onycheck.ui.screens.analyze.components.CustomImageCropper
@@ -33,8 +34,8 @@ import com.project.onycheck.ui.screens.analyze.components.DefaultAnalyzeContent
 import com.project.onycheck.ui.screens.analyze.components.LoadingView
 import com.project.onycheck.ui.screens.analyze.components.PhotoGuideDialog
 import com.project.onycheck.ui.screens.analyze.components.ResultView
+import com.project.onycheck.ui.screens.analyze.utils.convertBitmapToBase64
 import com.project.onycheck.ui.screens.analyze.utils.saveBitmapToTempFile
-import com.project.onycheck.ui.screens.analyze.utils.saveBitmapToUri
 import com.project.onycheck.ui.screens.diseasedetail.DiseaseDetailScreen
 
 private enum class AnalyzeScreenMode {
@@ -177,7 +178,8 @@ fun AnalyzeScreen(
                 uri = imageUriToCrop!!,
                 onCropSuccess = { croppedBitmap ->
                     val uri = saveBitmapToTempFile(context, croppedBitmap)
-                    viewModel.analyzeNailImage(context, uri)
+//                    viewModel.analyzeNailImage(context, uri)
+                    viewModel.analyzeNailImageBase64(uri, croppedBitmap)
                     imageUriToCrop = null
                     showCamera = false
                 },
@@ -253,8 +255,8 @@ fun AnalyzeScreen(
                         onLearnMore = { diseaseName ->
                             navController.navigate(createDiseaseDetailRoute(diseaseName.toString()))
                         },
-                        onFindDoctor = { navController.navigate("doctors") },
-                        onGoHome = { navController.navigate("home") }
+                        onFindDoctor = { NavItem.Doctors.navigate(navController) },
+                        onGoHome = { NavItem.Home.navigate(navController) }
                     )
                 }
 
