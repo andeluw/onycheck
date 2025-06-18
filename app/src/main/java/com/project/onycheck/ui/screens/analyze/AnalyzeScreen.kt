@@ -129,7 +129,7 @@ fun AnalyzeScreen(
         isLoading = false,
         selectedImageUri = defaultImageUri,
         predictionResult = PredictionResponse(
-            predicted_class = "Acral_Lentiginous_Melanoma", confidence = 0.88
+            predicted_class = "pitting", confidence = 0.88
         ),
         error = null
     )

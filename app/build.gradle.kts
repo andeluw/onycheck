@@ -93,4 +93,5 @@ dependencies {
     implementation(libs.accompanist.permissions)
     implementation(libs.google.places)
     implementation(libs.kotlinx.coroutines.play.services)
+    implementation(libs.core.splashscreen)
 }

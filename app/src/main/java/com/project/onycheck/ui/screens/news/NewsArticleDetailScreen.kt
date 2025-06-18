@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.project.onycheck.data.NewsData
 import com.project.onycheck.ui.components.AppScaffold
+import com.project.onycheck.ui.navigation.NavItem
 import com.project.onycheck.ui.theme.Gray700
 import com.project.onycheck.ui.theme.Gray900
 
@@ -35,7 +36,7 @@ fun NewsArticleDetailScreen(articleId: Int, navController: NavController) {
             TopAppBar(
                 title = { /* No title here */ },
                 navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
+                    IconButton(onClick = { navController.popBackStack(); NavItem.News.navigate(navController) }) {
                         Icon(
                             Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = "Back",

@@ -16,7 +16,7 @@ interface NailApi {
         @Part file: MultipartBody.Part
     ): Response<PredictionResponse>
 
-    @POST("/predict_base64")
+    @POST("/predict-base64")
     suspend fun predictNailConditionBase64(
         @Body payload: Base64ImagePayload
     ): Response<PredictionResponse>

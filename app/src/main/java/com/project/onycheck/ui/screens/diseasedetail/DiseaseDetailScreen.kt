@@ -88,6 +88,7 @@ fun DiseaseDetailScreen(diseaseName: String, navController: NavController) {
                     painter = painterResource(id = detail.imageRes),
                     contentDescription = detail.userFriendlyName,
                     contentScale = ContentScale.Crop,
+                    alignment = Alignment.TopCenter,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(250.dp)

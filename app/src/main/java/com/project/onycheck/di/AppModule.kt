@@ -42,7 +42,7 @@ object AppModule {
     @Named("NailApi") // ✅ Name this provider "NailApi"
     fun provideNailRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(BuildConfig.API_BASE_URL) // Uses your nail detection URL
+            .baseUrl(BuildConfig.API_BASE_URL)
 //            .baseUrl("https://andeluw-naildetection.hf.space/")
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
@@ -51,7 +51,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideNailApi(@Named("NailApi") retrofit: Retrofit): NailApi { // ✅ Inject the named Retrofit
+    fun provideNailApi(@Named("NailApi") retrofit: Retrofit): NailApi {
         return retrofit.create(NailApi::class.java)
     }
 
@@ -69,7 +69,7 @@ object AppModule {
     @Named("PlacesApi") // ✅ Name this provider "PlacesApi"
     fun providePlacesRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://maps.googleapis.com/") // Uses the Google Maps base URL
+            .baseUrl("https://maps.googleapis.com/")
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -77,11 +77,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providePlacesApi(@Named("PlacesApi") retrofit: Retrofit): PlacesApi { // ✅ Inject the named Retrofit
+    fun providePlacesApi(@Named("PlacesApi") retrofit: Retrofit): PlacesApi {
         return retrofit.create(PlacesApi::class.java)
     }
-
-    // Note: You don't need a provider for PlacesRepository if its constructor
-    // is annotated with @Inject, as Hilt can create it automatically now
-    // that it knows how to provide PlacesApi.
 }

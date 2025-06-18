@@ -34,9 +34,8 @@ fun NewsScreen(navController: NavController) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .background(Color.White)
-                .padding(horizontal = 16.dp, vertical = 24.dp),
-//            contentPadding = PaddingValues(16.dp),
+                .background(Color.White),
+            contentPadding = PaddingValues(top = 16.dp, start = 16.dp, end = 16.dp, bottom = 24.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             item {

@@ -1,5 +1,6 @@
 package com.project.onycheck.data.repository
 
+import android.util.Log
 import com.project.onycheck.BuildConfig
 import com.project.onycheck.data.Doctor
 import com.project.onycheck.data.remote.PlacesApi
@@ -14,22 +15,19 @@ import javax.inject.Singleton
 class PlacesRepository @Inject constructor(
     private val placesApi: PlacesApi
 ) {
-    /**
-     * Finds nearby dermatologists using the Google Places Text Search API.
-     */
     suspend fun findNearbyDermatologists(
         latitude: Double,
         longitude: Double
     ): List<Doctor> {
-        // Build the request body
         val request = PlacesRequest(
             textQuery = "dermatologist",
             locationBias = LocationBias(
                 circle = Circle(
                     center = Center(latitude, longitude),
-                    radius = 10000.0 // 10km radius
+                    radius = 15000.0
                 )
-            )
+            ),
+            rankPreference = "DISTANCE"
         )
 
         return try {
@@ -38,13 +36,13 @@ class PlacesRepository @Inject constructor(
                 requestBody = request
             )
 
+            Log.d("PlacesRepository", "API Response: ${response.body()}")
+
             if (response.isSuccessful && response.body() != null) {
-                // Map the results from the Google Places API (PlaceResult)
-                // to your app's internal Doctor data model.
                 response.body()!!.places.map { placeResult ->
                     Doctor(
                         name = placeResult.displayName.text,
-                        specialty = "Dermatologist", // Assumed from search
+                        specialty = "Dermatologist",
                         address = placeResult.formattedAddress,
                         phone = placeResult.internationalPhoneNumber ?: "Not available",
                         lat = placeResult.location.latitude,
@@ -57,7 +55,6 @@ class PlacesRepository @Inject constructor(
                 emptyList()
             }
         } catch (e: Exception) {
-            // Handle network errors
             emptyList()
         }
     }

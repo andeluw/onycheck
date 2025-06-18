@@ -38,12 +38,12 @@ class DoctorsViewModel @Inject constructor(
 
     fun onPermissionResult(isGranted: Boolean) {
         _uiState.update { it.copy(locationPermissionGranted = isGranted) }
-//        if (isGranted) {
-//            fetchNearbyDoctors()
-//        } else {
-//            loadDefaultDoctors("Location permission denied. Showing results for Surabaya.")
-//        }
-        loadDefaultDoctors("Location permission denied. Showing results for Surabaya.")
+        if (isGranted) {
+            fetchNearbyDoctors()
+        } else {
+            loadDefaultDoctors("Location permission denied. Showing results for Surabaya.")
+        }
+//        loadDefaultDoctors("Location permission denied. Showing results for Surabaya.")
     }
 
     @SuppressLint("MissingPermission")
@@ -52,7 +52,6 @@ class DoctorsViewModel @Inject constructor(
 
         viewModelScope.launch {
             try {
-                // Use .await() to get the location result in a coroutine
                 val location: Location? = fusedLocationClient.lastLocation.await()
 
                 if (location != null) {
@@ -74,7 +73,6 @@ class DoctorsViewModel @Inject constructor(
         _uiState.update {
             it.copy(
                 isLoading = false,
-                // The default list is doctors in Surabaya
                 doctors = DoctorData.allDoctors.filter { doc -> doc.address.contains("Surabaya") },
                 error = errorMessage
             )

@@ -327,6 +327,7 @@ internal fun CameraView(
                     .size(64.dp)
                     .border(4.dp, Color.White, CircleShape),
                 onClick = {
+                    camera?.cameraControl?.enableTorch(false)
                     takePhoto(context, imageCapture, onImageCaptured, onError)
                 }
             ) {

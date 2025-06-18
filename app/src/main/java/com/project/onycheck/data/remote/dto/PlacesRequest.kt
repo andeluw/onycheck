@@ -2,7 +2,8 @@ package com.project.onycheck.data.remote.dto
 
 data class PlacesRequest(
     val textQuery: String,
-    val locationBias: LocationBias? = null
+    val locationBias: LocationBias? = null,
+    val rankPreference: String? = null
 )
 
 data class LocationBias(

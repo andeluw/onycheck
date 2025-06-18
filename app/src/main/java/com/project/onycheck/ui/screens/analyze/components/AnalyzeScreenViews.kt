@@ -89,7 +89,7 @@ internal fun DefaultAnalyzeContent(
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = "Melanoma, Clubbing, Pitting, and Blue Finger.",
+            text = "Melanoma, Clubbing, and Pitting.",
             style = MaterialTheme.typography.bodyMedium,
             textAlign = TextAlign.Center,
             fontWeight = FontWeight.SemiBold,
@@ -122,7 +122,7 @@ internal fun DefaultAnalyzeContent(
             Text(
                 "Analyze Your Nail",
                 style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.SemiBold
+                fontWeight = FontWeight.SemiBold,
             )
         }
         Spacer(modifier = Modifier.height(8.dp))
@@ -526,7 +526,8 @@ internal fun PhotoGuideDialog(onDismiss: () -> Unit) {
             Button(
                 onClick = onDismiss,
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Blue800
+                    containerColor = Blue800,
+                    contentColor = Color.White
                 )
             ) {
                 Text(

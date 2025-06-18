@@ -7,7 +7,7 @@ object DiseaseData {
         DiseaseDetail(
             key = "Acral_Lentiginous_Melanoma",
             userFriendlyName = "Acral Lentiginous Melanoma",
-            imageRes = R.drawable.correctnail,
+            imageRes = R.drawable.disease_melanoma,
             overview = "A rare and serious type of skin cancer that appears on the palms, soles, or under the nails. It often presents as a dark streak and can be mistaken for a bruise.",
             symptoms = listOf(
                 "A dark brown or black streak under the nail, often starting at the cuticle.",
@@ -73,7 +73,7 @@ object DiseaseData {
         DiseaseDetail(
             key = "clubbing",
             userFriendlyName = "Nail Clubbing",
-            imageRes = R.drawable.correctnail,
+            imageRes = R.drawable.disease_clubbing,
             overview = "Nail clubbing is when the fingertips enlarge and the nails curve around them. This change often happens gradually over years and can be a sign of a serious underlying medical condition.",
             symptoms = listOf(
                 "Widening and rounding of the fingertips.",
@@ -96,7 +96,7 @@ object DiseaseData {
         DiseaseDetail(
             key = "pitting",
             userFriendlyName = "Nail Pitting",
-            imageRes = R.drawable.correctnail,
+            imageRes = R.drawable.disease_pitting,
             overview = "Nail pitting refers to the presence of small, shallow depressions or 'pits' on the surface of the nails. It is often associated with certain autoimmune and skin conditions.",
             symptoms = listOf(
                 "Small, ice pick-like depressions on the nail plate.",

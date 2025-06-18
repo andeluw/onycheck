@@ -63,7 +63,8 @@ fun DoctorsScreen(
                 .fillMaxSize()
                 .padding(innerPadding)
                 .background(Color.White)
-                .padding(horizontal = 16.dp, vertical = 24.dp)
+                .padding(horizontal = 16.dp)
+                .padding(top = 24.dp),
         ) {
             Column(modifier = Modifier.padding(start = 8.dp, bottom = 16.dp)) {
                 if (!uiState.isLoading) {
@@ -79,7 +80,7 @@ fun DoctorsScreen(
                     Text(
                         "Showing doctors in Surabaya. Allow location access for nearby results.",
                         style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                        color = Gray900
                     )
                 }
             }
@@ -100,7 +101,8 @@ fun DoctorsScreen(
                 }
             } else {
                 LazyColumn(
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                    contentPadding = PaddingValues(bottom = 24.dp)
                 ) {
                     items(uiState.doctors) { doctor ->
                         DoctorCard(doctor = doctor)
