@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -88,7 +89,7 @@ internal fun DefaultAnalyzeContent(
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = "Melanoma, Onychogryphosis, Clubbing, Pitting, and Blue Finger.",
+            text = "Melanoma, Clubbing, Pitting, and Blue Finger.",
             style = MaterialTheme.typography.bodyMedium,
             textAlign = TextAlign.Center,
             fontWeight = FontWeight.SemiBold,
@@ -399,38 +400,42 @@ private fun DiseaseResultContent(
 //        Spacer(modifier = Modifier.weight(1f))
         Spacer(modifier = Modifier.height(16.dp))
 
-        Button(
-            onClick = { onLearnMore(result.predicted_class) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(44.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Blue700,
-                contentColor = Color.White
-            )
-        ) {
-            Text(
-                "Learn More",
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.SemiBold
-            )
-        }
-        Spacer(modifier = Modifier.height(8.dp))
-        OutlinedButton(
-            onClick = onFindDoctor,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(44.dp),
-            colors = ButtonDefaults.outlinedButtonColors(
-                contentColor = Blue700
-            ),
-            border = BorderStroke(1.5.dp, Blue700)
-        ) {
-            Text(
-                "Find a Doctor",
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.SemiBold
-            )
+        Row {
+            Button(
+                onClick = { onLearnMore(result.predicted_class) },
+                modifier = Modifier
+                    .fillMaxWidth()
+//                    .height(44.dp),
+                    .weight(1f),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Blue700,
+                    contentColor = Color.White
+                )
+            ) {
+                Text(
+                    "Learn More",
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.SemiBold
+                )
+            }
+            Spacer(modifier = Modifier.width(8.dp))
+            OutlinedButton(
+                onClick = onFindDoctor,
+                modifier = Modifier
+                    .fillMaxWidth()
+//                    .height(44.dp),
+                    .weight(1f),
+                colors = ButtonDefaults.outlinedButtonColors(
+                    contentColor = Blue700
+                ),
+                border = BorderStroke(1.5.dp, Blue700),
+            ) {
+                Text(
+                    "Find Doctors",
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.SemiBold
+                )
+            }
         }
         Spacer(modifier = Modifier.height(8.dp))
         TextButton(

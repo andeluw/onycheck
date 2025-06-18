@@ -1,3 +1,13 @@
+import java.io.FileInputStream
+import java.util.Properties
+
+val localProperties = Properties().apply {
+    load(FileInputStream(rootProject.file("local.properties")))
+}
+
+val mapsApiKey = localProperties.getProperty("MAPS_API_KEY") ?: ""
+val apiBaseUrl = localProperties.getProperty("API_BASE_URL") ?: ""
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -18,6 +28,12 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+//        buildConfigField("String", "MAPS_API_KEY", "\"${project.findProperty("MAPS_API_KEY")}\"")
+//        buildConfigField("String", "API_BASE_URL", "\"${project.findProperty("API_BASE_URL")}\"")
+//        buildConfigField("String", "API_BASE_URL", "\"https://andeluw-naildetection.hf.space/\"")
+        buildConfigField("String", "MAPS_API_KEY", "\"$mapsApiKey\"")
+        buildConfigField("String", "API_BASE_URL", "\"$apiBaseUrl\"")
     }
 
     buildTypes {
@@ -37,8 +53,10 @@ android {
         jvmTarget = "11"
     }
     buildFeatures {
+        buildConfig = true
         compose = true
     }
+
 }
 
 dependencies {
@@ -71,4 +89,8 @@ dependencies {
     implementation(libs.icons.lucide)
     implementation(libs.material.icons.extended)
     implementation(libs.cropper.compose)
+    implementation(libs.play.services.location)
+    implementation(libs.accompanist.permissions)
+    implementation(libs.google.places)
+    implementation(libs.kotlinx.coroutines.play.services)
 }

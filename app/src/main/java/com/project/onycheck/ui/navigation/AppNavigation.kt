@@ -10,6 +10,7 @@ import com.project.onycheck.ui.screens.analyze.AnalyzeScreen
 import com.project.onycheck.ui.screens.diseasedetail.DiseaseDetailScreen
 import com.project.onycheck.ui.screens.doctors.DoctorsScreen
 import com.project.onycheck.ui.screens.home.HomeScreen
+import com.project.onycheck.ui.screens.news.NewsArticleDetailScreen
 import com.project.onycheck.ui.screens.news.NewsScreen
 
 @Composable
@@ -42,6 +43,16 @@ fun AppNavigation() {
                 DiseaseDetailScreen(diseaseName = diseaseName, navController = navController)
             } else {
                 navController.popBackStack()
+            }
+        }
+
+        composable(
+            route = "${NavItem.NewsArticleDetail.route}/{articleId}",
+            arguments = listOf(navArgument("articleId") { type = NavType.IntType })
+        ) { backStackEntry ->
+            val articleId = backStackEntry.arguments?.getInt("articleId")
+            if (articleId != null) {
+                NewsArticleDetailScreen(articleId = articleId, navController = navController)
             }
         }
     }

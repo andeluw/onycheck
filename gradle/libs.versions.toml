@@ -22,6 +22,10 @@ okhttp = "4.12.0"
 iconsLucide = "1.0.0"
 materialIconsExtended = "1.6.8"
 composeCropper = "0.5.0"
+playServicesLocation = "21.3.0"
+accompanist = "0.34.0"
+places = "3.4.0"
+kotlinxCoroutinesPlayServices = "1.8.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -54,6 +58,10 @@ coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 icons-lucide = { module = "com.composables:icons-lucide", version.ref = "iconsLucide" }
 material-icons-extended = { module = "androidx.compose.material:material-icons-extended-android", version.ref = "materialIconsExtended" }
 cropper-compose = { module = "com.github.SmartToolFactory:Compose-Cropper", version.ref = "composeCropper" }
+play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
+accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
+google-places = { module = "com.google.android.libraries.places:places", version.ref = "places" }
+kotlinx-coroutines-play-services = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services", version.ref = "kotlinxCoroutinesPlayServices" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

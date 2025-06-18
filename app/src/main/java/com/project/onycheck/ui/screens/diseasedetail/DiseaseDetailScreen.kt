@@ -77,7 +77,7 @@ fun DiseaseDetailScreen(diseaseName: String, navController: NavController) {
                     text = detail.userFriendlyName,
                     style = MaterialTheme.typography.headlineMedium,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(vertical = 16.dp),
+                    modifier = Modifier.padding(vertical = 24.dp),
                     color = Gray900
                 )
             }
@@ -133,7 +133,7 @@ fun DiseaseDetailScreen(diseaseName: String, navController: NavController) {
                         )
                     ) {
                         Text(
-                            "Find a Doctor Nearby",
+                            "Find Doctors Nearby",
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.SemiBold
                         )

@@ -20,6 +20,7 @@ sealed class NavItem(
     object Doctors : NavItem("doctors", Icons.Rounded.MedicalInformation, "Doctors")
 
     object DiseaseDetail : NavItem("disease_detail")
+    object NewsArticleDetail : NavItem("news_article_detail")
 
     fun navigate(navController: NavController) {
         navController.navigate(route) {
@@ -34,4 +35,8 @@ sealed class NavItem(
 
 fun createDiseaseDetailRoute(diseaseName: String): String {
     return "${NavItem.DiseaseDetail.route}/$diseaseName"
+}
+
+fun createNewsArticleDetailRoute(articleId: Int): String {
+    return "${NavItem.NewsArticleDetail.route}/$articleId"
 }
